@@ -16,7 +16,7 @@ const BlogItem = ({title,description,category,image,id}) => {
         <Link href={`/blogs/${id}`} className='inline-flex items-center py-2 font-semibold text-center'>
           READ MORE <Image src={assets.arrow} className='ml-2' alt=' width={12}'/>
         </Link>
-      </div> 
+      </div>
     </div>
   )
 }

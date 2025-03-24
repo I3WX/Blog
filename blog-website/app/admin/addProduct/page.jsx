@@ -32,10 +32,12 @@ const Page = () => {
     formData.append("authorImage", data.authorImage);
     formData.append("image", image);
     try {
-      //toast is  very slow
+
+
       const res = await axios.post("/api/blog", formData);
       if (res.data.success) {
-        toast.success(res.data.message);
+        console.log("Response data:", JSON.stringify(res.data, null, 2));
+        toast.success(res.data.msg);
         setImage(false);
         setData({
           title: "",
