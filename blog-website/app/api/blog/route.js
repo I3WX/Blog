@@ -17,8 +17,15 @@ LoadDB();
 // API Endpoint to get all blogs
 export async function GET(request) {
   try {
-    const blogs = await BlogModel.find({});
-    return NextResponse.json({ blogs });
+    const blogId = request.nextUrl.searchParams.get("id");
+    if (blogId) {
+      const blog = await BlogModel.findById(blogId);
+      return NextResponse.json(blog);
+    }
+    else{
+      const blogs = await BlogModel.find({});
+      return NextResponse.json({ blogs });
+    }
   } catch (error) {
     console.error('Error fetching blogs:', error);
     return NextResponse.json({ error: 'Error fetching blogs' }, { status: 500 });
@@ -44,7 +51,7 @@ export async function POST(request) {
       category: `${formData.get("category")}`,
       author: `${formData.get("author")}`,
       image: `${imageURL}`,
-      authorImg: `${formData.get("authorImg")}`,
+      authorImg: `${formData.get("authorImage") || "/author_img.png"}`, // Default value
     };
 
     await BlogModel.create(blogData);

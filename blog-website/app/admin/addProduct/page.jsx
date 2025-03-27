@@ -24,16 +24,17 @@ const Page = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+  
+    // Ensure authorImage has a default value if not set
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("author", data.author);
-    formData.append("authorImage", data.authorImage);
+    formData.append("authorImage", data.authorImage || "/author_img.png"); // Default value
     formData.append("image", image);
+  
     try {
-
-
       const res = await axios.post("/api/blog", formData);
       if (res.data.success) {
         console.log("Response data:", JSON.stringify(res.data, null, 2));
@@ -44,7 +45,7 @@ const Page = () => {
           description: "",
           category: "Startup",
           author: "Alex Bennett",
-          authorImage: "/author_img.png",
+          authorImage: "/author_img.png", // Reset to default
         });
       } else {
         toast.error("Error occurred");

@@ -6,7 +6,7 @@ const BlogSchema = new mongoose.Schema({
     category: { type: String, required: true },
     author: { type: String, required: true },
     image: { type: String, required: true },
-    authorImg: { type: String, required: true },
+    authorImg: { type: String, default:`/author_img.png` ,required: true },
     Date:{type:Date,default:Date.now}
 });
 
