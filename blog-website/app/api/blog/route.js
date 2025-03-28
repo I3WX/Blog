@@ -2,6 +2,7 @@ const { NextResponse } = require("next/server");
 import { ConnectDB } from "@/lib/config/db";
 import BlogModel from "@/lib/models/blogModel";
 import { writeFile } from "fs/promises";
+const fs = require('fs');
 
 const LoadDB = async () => {
   try {
@@ -59,5 +60,21 @@ export async function POST(request) {
   } catch (error) {
     console.error('Error adding blog:', error);
     return NextResponse.json({ error: 'Error adding blog' }, { status: 500 });
+  }
+}
+
+
+// creating API Endpoint for deleting a blog
+
+export async function DELETE(request) {
+  try {
+    const blogId = request.nextUrl.searchParams.get("id");
+    const blog = await BlogModel.findById(blogId);
+    fs.unlink(`./public/${blog.image}`, () => {});
+    await BlogModel.findByIdAndDelete(blogId);
+    return NextResponse.json({ success: true, msg: "blog deleted" });
+  } catch (error) {
+    console.error('Error deleting blog:', error);
+    return NextResponse.json({ error: 'Error deleting blog' }, { status: 500 });
   }
 }
