@@ -1,18 +1,34 @@
 import { assets } from "@/Assets/assets";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [email, setEmail] = useState("");
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    toast.success("Logged out successfully");
+    router.push("/");
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("email", email);
     const response = await axios.post("/api/email", formData);
-    console.log(response.data);
     if (response.data.success) {
       toast.success(response.data.msg);
       setEmail("");
@@ -30,9 +46,21 @@ const Header = () => {
           width={180}
           className="w-[130px] sm:w-auto"
         />
-        <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]">
-          Get started <Image src={assets.arrow} alt="" />
-        </button>
+        {user ? (
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]"
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            onClick={() => router.push("/auth")}
+            className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]"
+          >
+            Get started <Image src={assets.arrow} alt="" />
+          </button>
+        )}
       </div>
       <div className="text-center my-8">
         <h1 className="text-3xl sm:text-5xl font-medium">Latest Blog</h1>
