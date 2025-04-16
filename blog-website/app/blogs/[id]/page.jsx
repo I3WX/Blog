@@ -71,7 +71,7 @@ const Page = ({ params: paramsPromise }) => {
           height={720}
         />
         <h1 className="my-8 text-[26px] font-semibold">Introduction :</h1>
-        <p>{data.description}</p>
+        <div className="blog-content" dangerouslySetInnerHTML={{__html:data.description}}></div>
         <div className="my-24">
           <p className="text-black font-semibold my-4">
             Share this article on social media
