@@ -1,6 +1,18 @@
 // In your route.js (or similar auth route file)
-import { UserModel } from '../lib/models/userModel';
+import UserModel from '@/lib/models/UserModel'; // Adjust the import path as necessary
+import { ConnectDB } from '@/lib/config/db';
 import { NextResponse } from 'next/server'; // Assuming Next.js
+
+const LoadDB = async () => {
+  try {
+    await ConnectDB();
+    console.log('Database connected');
+  } catch (error) {
+    console.error('Database connection error:', error);
+  }
+};
+
+LoadDB();
 
 export async function POST(req) {
     try {
