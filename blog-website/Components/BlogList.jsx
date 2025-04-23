@@ -18,55 +18,81 @@ const BlogList = () => {
   return (
     <div>
       <div className="flex justify-center gap-6 my-10">
-        <button
-          onClick={() => {
-            setMenu("All");
-            console.log("Menu:", "All");
-          }}
-          className={
-            menu === "All" ? "bg-black text-white py-1 px-4 rounded-sm" : ""
-          }
-        >
-          All
-        </button>
-        <button
-          onClick={() => {
-            setMenu("Technology");
-            console.log("Menu:", "Technology");
-          }}
-          className={
-            menu === "Technology"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : ""
-          }
-        >
-          Technology
-        </button>
-        <button
-          onClick={() => {
-            setMenu("Startup");
-            console.log("Menu:", "Startup");
-          }}
-          className={
-            menu === "Startup" ? "bg-black text-white py-1 px-4 rounded-sm" : ""
-          }
-        >
-          Startup
-        </button>
-        <button
-          onClick={() => {
-            setMenu("Lifestyle");
-            console.log("Menu:", "Lifestyle");
-          }}
-          className={
-            menu === "Lifestyle"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : ""
-          }
-        >
-          Lifestyle
-        </button>
-      </div>
+  <button
+    onClick={() => {
+      setMenu("All");
+      console.log("Menu:", "All");
+    }}
+    className={menu === "All" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    All
+  </button>
+  <button
+    onClick={() => {
+      setMenu("Technology");
+      console.log("Menu:", "Technology");
+    }}
+    className={menu === "Technology" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Technology
+  </button>
+  <button
+    onClick={() => {
+      setMenu("Startup");
+      console.log("Menu:", "Startup");
+    }}
+    className={menu === "Startup" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Startup
+  </button>
+  <button
+    onClick={() => {
+      setMenu("Lifestyle");
+      console.log("Menu:", "Lifestyle");
+    }}
+    className={menu === "Lifestyle" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Lifestyle
+  </button>
+  {/* New buttons */}
+  <button
+    onClick={() => {
+      setMenu("Health & Wellness");
+      console.log("Menu:", "Health & Wellness");
+    }}
+    className={menu === "Health & Wellness" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Health & Wellness
+  </button>
+  <button
+    onClick={() => {
+      setMenu("Travel");
+      console.log("Menu:", "Travel");
+    }}
+    className={menu === "Travel" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Travel
+  </button>
+  <button
+    onClick={() => {
+      setMenu("Finance");
+      console.log("Menu:", "Finance");
+    }}
+    className={menu === "Finance" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Finance
+  </button>
+  <button
+    onClick={() => {
+      setMenu("Entertainment");
+      console.log("Menu:", "Entertainment");
+    }}
+    className={menu === "Entertainment" ? "bg-black text-white py-1 px-4 rounded-sm" : ""}
+  >
+    Entertainment
+  </button>
+</div>
+
       <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mb-24">
         {blogList
           .filter((item) => (menu === "All" ? true : item.category === menu))

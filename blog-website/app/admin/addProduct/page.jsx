@@ -24,7 +24,7 @@ const Page = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-  
+
     // Ensure authorImage has a default value if not set
     const formData = new FormData();
     formData.append("title", data.title);
@@ -33,7 +33,7 @@ const Page = () => {
     formData.append("author", data.author);
     formData.append("authorImage", data.authorImage || "/author_img.png"); // Default value
     formData.append("image", image);
-  
+
     try {
       const res = await axios.post("/api/blog", formData);
       if (res.data.success) {
@@ -106,6 +106,10 @@ const Page = () => {
           <option value="Startup">Startup</option>
           <option value="Technology">Technology</option>
           <option value="Lifestyle">Lifestyle</option>
+          <option value="Health & Wellness">Health & Wellness</option>
+          <option value="Travel">Travel</option>
+          <option value="Finance">Finance</option>
+          <option value="Entertainment">Entertainment</option>
         </select>
         <br />
         <button type="submit" className="mt-8 w-40 h-12 bg-black text-white">
